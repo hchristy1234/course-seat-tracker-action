@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import json
+from courses.base_course import BaseCourse
 
 class PHYSICS_7B(BaseCourse):
     """
