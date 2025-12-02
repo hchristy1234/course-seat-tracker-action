@@ -2,11 +2,7 @@ import sys
 import importlib
 
 COURSE_TO_DETECT = [
-    # 'ENGIN_183D',
-    # 'INDENG_120',
-    # 'BIOENG_100',
-    # 'UGBA_152',
-    'CS_177',
+    'PHYSICS_7B',
 ]
 
 def check_course_availability(course_name):
