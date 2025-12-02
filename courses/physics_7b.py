@@ -64,3 +64,31 @@ class PHYSICS_7B(BaseCourse):
         available = total_open_seats > 0
         message = f"PHYSICS 7B has {total_open_seats} seats opened!"
         return available, message
+
+    @staticmethod
+    def calculate_total_open_seats(available):
+        """Algorithm to calculate total open seats for UC Berkeley's courses
+
+        Note: it's not a simply max_enroll - enrolled_count
+        Below code refers to:
+        https://classes.berkeley.edu/sites/default/files/js/js_wkZa4u4BCnSi4JXgkE3Om2OjgDKSaG35ZwAKoHBOzqI.js
+
+        >>> available = {
+        ...        'combination': {
+        ...            'maxEnrollCombinedSections': 90,
+        ...            'enrolledCountCombinedSections': 118
+        ...        },
+        ...        'enrollmentStatus': {
+        ...            'maxEnroll': 74,
+        ...            'enrolledCount': 72
+        ...        }}
+        >>> CS160.calculate_total_open_seats(available)
+        0
+        """
+        if 'combination' in available:
+            combined_open_seats = available['combination']['maxEnrollCombinedSections'] - available['combination']['enrolledCountCombinedSections']
+            per_class_open_seats = available['enrollmentStatus']['maxEnroll'] - available['enrollmentStatus']['enrolledCount']
+            value = min(combined_open_seats, per_class_open_seats)
+            return max(value, 0)
+        else:
+            return max(available['enrollmentStatus']['maxEnroll'] - available['enrollmentStatus']['enrolledCount'], 0)
